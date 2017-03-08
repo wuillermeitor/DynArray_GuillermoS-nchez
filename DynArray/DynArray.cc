@@ -24,7 +24,7 @@ DynArray::~DynArray() {
 DynArray& DynArray::operator= (const DynArray &x) {
 	m_capacity = x.m_capacity;
 	m_size = x.m_size;
-	for (int i = 0 ; i < m_size; i++) {
+	for (int i = 0; i < m_size; i++) {
 		m_data[i] = x[i];
 	}
 	return *this;
@@ -54,6 +54,24 @@ bool operator== (const DynArray& lhs, const DynArray& rhs) {
 		}
 	}
 	return true;
+}
+
+bool operator!= (const DynArray& lhs, const DynArray& rhs) {
+	int i = 0;
+
+	while (i < lhs.m_size) {
+		if (lhs[i] != rhs[i]) {
+			i++;
+		}
+		else {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool operator<  (const DynArray& lhs, const DynArray& rhs) {
+
 }
 
 std::ostream& operator<< (std::ostream &out, const DynArray &x) {
