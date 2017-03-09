@@ -60,14 +60,19 @@ int& DynArray::operator[] (size_t n) const {
 
 void DynArray::push(const int &val) {
 	int *tmp;
+
 	if (m_size == m_capacity){
+		
+		tmp = new int[m_capacity+m_size/2];
+
+		for (int i = 0; i < m_size; i++) {
+			tmp[i] = m_data[i];
+		}
 		delete[] m_data;
-		tmp = new int[m_capacity + 1];
+		m_data = tmp;
 	}
-	else if (m_size < m_capacity) {
-		m_size++;
-		DynArray::DynArray[m_size] = val;
-	}
+	m_data[m_size] = val;
+	m_size++;
 }
 
 bool operator== (const DynArray& lhs, const DynArray& rhs) {
