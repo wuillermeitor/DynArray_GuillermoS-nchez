@@ -8,13 +8,11 @@ DynArray::DynArray(void) {
 	m_data = new int[m_capacity];
 }
 
-/*DynArray::DynArray(void):
-	m_capacity(DYN_ARRAY_DEFAULT_SIZE),
-	m_size(0),
-	m_data(new int[m_capacity])
-{
+DynArray::DynArray(size_t size) {
+	m_capacity = size;
+	m_size = size;
+	m_data = new int[size];
 }
-*/
 
 DynArray::DynArray(size_t size, const int &value) {
 	m_capacity = size;
@@ -58,6 +56,18 @@ int* DynArray::end(void) const {
 
 int& DynArray::operator[] (size_t n) const {
 	return m_data[n];
+}
+
+void DynArray::push(const int &val) {
+	int *tmp;
+	if (m_size == m_capacity){
+		delete[] m_data;
+		tmp = new int[m_capacity + 1];
+	}
+	else if (m_size < m_capacity) {
+		m_size++;
+		DynArray::DynArray[m_size] = val;
+	}
 }
 
 bool operator== (const DynArray& lhs, const DynArray& rhs) {
